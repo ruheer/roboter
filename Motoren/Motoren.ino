@@ -52,7 +52,7 @@ digitalWrite(rightMotorPin2, HIGH);
 analogWrite(enableRightMotor, motorSpeed);
 
 digitalWrite(leftMotorPin1, LOW);
-digitalWrite(leftMotorPin1, LOW);
+digitalWrite(leftMotorPin1, HIGH);
 analogWrite(enableLeftMotor, motorSpeed);
 }
 void right() {
