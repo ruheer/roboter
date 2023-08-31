@@ -37,18 +37,22 @@ void setup() {
 }
 
 void loop() {
-
+  
   if (analogRead(SensorWhite) < 988) { // Fix Me
     //right();
     backwards();
+    right();
   }
-  else{
-  forward();}
   dmesurement();
-  if (distance < 25){backwards();}
-  
+  if (distance < 40){forward();}
+  else {wait();}
   
 }
+
+void wait(){
+  right();
+}
+
 void forward() {
   analogWrite(enableRightMotor, motorSpeed);
   digitalWrite(rightMotorPin1, HIGH);
