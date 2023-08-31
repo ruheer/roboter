@@ -79,7 +79,15 @@ void right() {
   analogWrite(enableLeftMotor, motorSpeed);
   digitalWrite(leftMotorPin1, LOW);
   digitalWrite(leftMotorPin2, HIGH);
+}
+void left() { //guess what, it turns left
+  analogWrite(enableRightMotor, motorSpeed);
+  digitalWrite(rightMotorPin1, LOW);
+  digitalWrite(rightMotorPin2, HIGH);
 
+  analogWrite(enableLeftMotor, motorSpeed);
+  digitalWrite(leftMotorPin1, HIGH);
+  digitalWrite(leftMotorPin2, LOW);
 }
 //distance mesurement
 void dmesurement(){
