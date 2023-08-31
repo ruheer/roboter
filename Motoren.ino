@@ -40,7 +40,7 @@ void foward() {
 
   analogWrite(enableLeftMotor, motorSpeed);
   digitalWrite(leftMotorPin1, HIGH);
-  digitalWrite(leftmotorpin2, LOW);
+  digitalWrite(leftMotorPin2, LOW);
 
 }
 void right() {
@@ -50,6 +50,6 @@ void right() {
 
   analogWrite(enableLeftMotor, motorSpeed);
   digitalWrite(leftMotorPin1, LOW);
-  digitalWrite(leftmotorpin2, HIGH);
+  digitalWrite(leftMotorPin2, HIGH);
 
 }
