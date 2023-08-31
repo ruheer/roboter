@@ -43,11 +43,13 @@ void loop() {
   //delay(10);
   if (analogRead(SensorWhite) < 988) { // Fix Me
     //right();
-    backward();
+    backwards();
   }
   else{
   forward();}
   dmesurement();
+  if (distance < 25){backwards();}
+  
   
 }
 void forward() {
@@ -60,7 +62,7 @@ void forward() {
   digitalWrite(leftMotorPin2, LOW);
 
 }
-void backward(){
+void backwards(){
 digitalWrite(rightMotorPin1, LOW);
 digitalWrite(rightMotorPin2, HIGH);
 analogWrite(enableRightMotor, motorSpeed);
@@ -87,5 +89,5 @@ void dmesurement(){
   distance = pulseIn(echoPin,HIGH)*0.017;
   Serial.print(distance);
   Serial.println(" cm");
-  delay(100);
+  return distance;
 }
