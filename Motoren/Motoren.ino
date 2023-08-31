@@ -28,15 +28,19 @@ void setup() {
 }
 
 void loop() {
-  foward();
+  //foward();
   delay(1000);
-  backward();
+  //backward();
   delay(1000);
   if (analogRead(SensorWhite) < 988) { // Fix Me
-    right();
+    //right();
+    backward();
   }
+  else{
+  forward();}
+  
 }
-void foward() {
+void forward() {
   analogWrite(enableRightMotor, motorSpeed);
   digitalWrite(rightMotorPin1, HIGH);
   digitalWrite(rightMotorPin2, LOW);
