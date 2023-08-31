@@ -1,4 +1,9 @@
 //hello world
+//for mesurement sensor
+# define echoPin 9
+# define trigPin 10
+long distance;
+//for movement
 int motorSpeed = 127;
 // Rechter Motor
 int enableRightMotor = 3;
@@ -24,6 +29,10 @@ void setup() {
   //Speed
   analogWrite(enableRightMotor, motorSpeed);
   analogWrite(enableLeftMotor, motorSpeed);
+  //distance sensor
+  pinMode(echoPin,INPUT);
+  pinMode(trigPin,OUTPUT);
+  Serial.begin(9600);
 
 }
 
@@ -38,6 +47,7 @@ void loop() {
   }
   else{
   forward();}
+  dmesurement();
   
 }
 void forward() {
@@ -68,4 +78,14 @@ void right() {
   digitalWrite(leftMotorPin1, LOW);
   digitalWrite(leftMotorPin2, HIGH);
 
+}
+//distance mesurement
+void dmesurement(){
+  digitalWrite(trigPin,HIGH);
+  delayMicroseconds(1000);
+  digitalWrite(trigPin,LOW);
+  distance = pulseIn(echoPin,HIGH)*0.017;
+  Serial.print(distance);
+  Serial.println(" cm");
+  delay(100);
 }
