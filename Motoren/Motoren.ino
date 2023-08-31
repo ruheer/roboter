@@ -37,10 +37,7 @@ void setup() {
 }
 
 void loop() {
-  //foward();
-  delay(1000);
-  //backward();
-  //delay(10);
+
   if (analogRead(SensorWhite) < 988) { // Fix Me
     //right();
     backwards();
