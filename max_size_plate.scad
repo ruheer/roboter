@@ -1,28 +1,30 @@
-use <BOSL/shapes.scad>
-
+x_max = 120;
+y_max = 200;
+x_ardu = 69;
+y_ardu = 53;
+h_ardu = 3;
+h_max = 5;
+r_sup = 4;
 module Arduino(){
-    cube([6.858,5.334,0.5]);
+    cube([x_ardu,y_ardu,h_ardu]);
     }
 module biggest(){
-    cube([10,10,0.1]);
+    cube([x_max,y_max,h_max]);
     }
-module dreadboard(){
-    cube([9,9,0.5]);
-    }
+
 module connection(){
-    cylinder(2,0.2,0.2,0.2);
+    cylinder(30,r_sup,r_sup,r_sup);
     }
-    translate([-3.429,-2.667,2.5])
-Arduino();
-    translate([-5,-5,-0.1])
-biggest();
-    translate([-4.5,-4.5,0])
-    dreadboard();
-    translate([-3.229,-2.467,0.5])
+    
+translate([-x_ardu/2,y_max/2 -y_ardu,30])
+    Arduino();
+translate([-x_max/2,-y_max/2])
+    biggest();
+translate([x_max/2 - x_ardu/2 + r_sup,y_max/2- r_sup,0])
     connection();
-    translate([3.229,-2.467,0.5])
+translate([-x_max/2 + x_ardu/2 - r_sup,y_max/2-r_sup,0 ])
     connection();
-    translate([-3.229,2.467,0.5])
+translate([x_max/2 - x_ardu/2+r_sup,y_max/2-y_ardu+r_sup,0])
     connection();
-    translate([3.229,2.467,0.5])
+translate([-x_ardu/2+r_sup,y_max/2-y_ardu+r_sup,0])
     connection();
