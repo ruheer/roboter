@@ -1,5 +1,5 @@
-x_max = 120;
-y_max = 200;
+x_max = 180;
+y_max = 140;
 x_ardu = 69;
 y_ardu = 53;
 h_ardu = 3;
@@ -20,11 +20,11 @@ translate([-x_ardu/2,y_max/2 -y_ardu,30])
     Arduino();
 translate([-x_max/2,-y_max/2])
     biggest();
-translate([x_max/2 - x_ardu/2 + r_sup,y_max/2- r_sup,0])
+translate([x_max/2 - x_ardu + r_sup,y_max/2- r_sup,0])
     connection();
-translate([-x_max/2 + x_ardu/2 - r_sup,y_max/2-r_sup,0 ])
+translate([-x_max/2 + x_ardu,y_max/2-r_sup,0 ])
     connection();
-translate([x_max/2 - x_ardu/2+r_sup,y_max/2-y_ardu+r_sup,0])
+translate([x_max/2 - x_ardu+r_sup,y_max/2-y_ardu+r_sup,0])
     connection();
-translate([-x_ardu/2+r_sup,y_max/2-y_ardu+r_sup,0])
+translate([x_max/4 - x_ardu+r_sup,y_max/2-y_ardu+r_sup,0])
     connection();
