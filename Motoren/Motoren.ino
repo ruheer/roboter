@@ -2,13 +2,17 @@
 //for mesurement sensor
 # define echoPin 9
 # define trigPin 10
+
 long distance;
+
 //for movement
 int motorSpeed = 127;
+
 // Rechter Motor
 int enableRightMotor = 3;
 int rightMotorPin1 = 8;
 int rightMotorPin2 = 7;
+
 // Linker Motor
 int enableLeftMotor = 6;
 int leftMotorPin1 = 4;
@@ -22,13 +26,16 @@ void setup() {
   pinMode(enableRightMotor, OUTPUT);
   pinMode(rightMotorPin1, OUTPUT);
   pinMode(rightMotorPin2, OUTPUT);
+
   // Linker Motor
   pinMode(enableLeftMotor, OUTPUT);
   pinMode(leftMotorPin1, OUTPUT);
   pinMode(leftMotorPin2, OUTPUT);
+
   //Speed
   analogWrite(enableRightMotor, motorSpeed);
   analogWrite(enableLeftMotor, motorSpeed);
+
   //distance sensor
   pinMode(echoPin,INPUT);
   pinMode(trigPin,OUTPUT);
@@ -38,22 +45,35 @@ void setup() {
 
 void loop() {
   
-  if (analogRead(SensorWhite) < 988) { // Fix Me
+  if (analogRead(SensorWhite) < 988) 
+  {
     //right();
     backwards();
     right();
   }
+
   dmesurement();
-  if (distance < 40){forward();}
-  else {wait();}
+  if (distance < 40)
+  {
+    forward();
+  }
+
+  else 
+  {
+    wait();
+  }
   
 }
 
-void wait(){
+//waiting for enemy
+void wait()
+{
   right();
 }
 
-void forward() {
+//goes forward
+void forward() 
+{
   analogWrite(enableRightMotor, motorSpeed);
   digitalWrite(rightMotorPin1, HIGH);
   digitalWrite(rightMotorPin2, LOW);
@@ -63,16 +83,22 @@ void forward() {
   digitalWrite(leftMotorPin2, LOW);
 
 }
-void backwards(){
-digitalWrite(rightMotorPin1, LOW);
-digitalWrite(rightMotorPin2, HIGH);
-analogWrite(enableRightMotor, motorSpeed);
 
-digitalWrite(leftMotorPin1, LOW);
-digitalWrite(leftMotorPin2, HIGH);
-analogWrite(enableLeftMotor, motorSpeed);
+//goes backwards
+void backwards()
+{
+  digitalWrite(rightMotorPin1, LOW);
+  digitalWrite(rightMotorPin2, HIGH);
+  analogWrite(enableRightMotor, motorSpeed);
+
+  digitalWrite(leftMotorPin1, LOW);
+  digitalWrite(leftMotorPin2, HIGH);
+  analogWrite(enableLeftMotor, motorSpeed);
 }
-void right() {
+
+//turns right
+void right() 
+{
   analogWrite(enableRightMotor, motorSpeed);
   digitalWrite(rightMotorPin1, HIGH);
   digitalWrite(rightMotorPin2, LOW);
@@ -81,7 +107,10 @@ void right() {
   digitalWrite(leftMotorPin1, LOW);
   digitalWrite(leftMotorPin2, HIGH);
 }
-void left() { //guess what, it turns left
+
+//guess what, it turns left
+void left() 
+{ 
   analogWrite(enableRightMotor, motorSpeed);
   digitalWrite(rightMotorPin1, LOW);
   digitalWrite(rightMotorPin2, HIGH);
@@ -90,8 +119,10 @@ void left() { //guess what, it turns left
   digitalWrite(leftMotorPin1, HIGH);
   digitalWrite(leftMotorPin2, LOW);
 }
+
 //distance mesurement
-void dmesurement(){
+void dmesurement()
+{
   digitalWrite(trigPin,HIGH);
   delayMicroseconds(1000);
   digitalWrite(trigPin,LOW);
