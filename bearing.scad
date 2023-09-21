@@ -7,6 +7,10 @@ height2=0.8;
 r3=1.1/2;
 height3=1.9+r2;
 
+height4=0.8;
+length4=0.55;
+width4=0.37;
+
 $fn=80;
 cylinder(height1, r1, r1);
 
@@ -23,5 +27,10 @@ translate([0, 0, height1]){
             }
         }
     }
-    cylinder(height3, r3, r3);
+    difference(){
+        cylinder(height3, r3, r3);
+        translate([0, 0, height3-height4+height4/2]){
+            #cube([width4, length4, height4], center=true);
+        }
+    }
 }
