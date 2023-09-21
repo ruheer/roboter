@@ -5,7 +5,7 @@ r2=1.87/2;
 height2=0.8;
 
 r3=1.1/2;
-height3=2+r2;
+height3=1.9+r2;
 
 $fn=80;
 cylinder(height1, r1, r1);
@@ -23,6 +23,5 @@ translate([0, 0, height1]){
             }
         }
     }
-        cylinder(height3, r3, r3);
+    cylinder(height3, r3, r3);
 }
-
