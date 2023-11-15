@@ -44,8 +44,11 @@ void setup() {
 }
 
 void loop() {
+  
   if(BWsensor() == false){
     forward();
+  }else{
+    backwards();
   }
 }
 
@@ -55,25 +58,27 @@ void wait() {
 }
 
 //goes forward
-void forward() {
+void backwards() {
   analogWrite(enableRightMotor, motorSpeed);
   digitalWrite(rightMotorPin1, HIGH);
   digitalWrite(rightMotorPin2, LOW);
 
   analogWrite(enableLeftMotor, motorSpeed);
-  digitalWrite(leftMotorPin1, HIGH);
-  digitalWrite(leftMotorPin2, LOW);
+  digitalWrite(leftMotorPin1, LOW);
+  digitalWrite(leftMotorPin2, HIGH);
+  Serial.println("hello world");
 }
 
 //goes backwards
-void backwards() {
+void forward() {
+  analogWrite(enableRightMotor, motorSpeed);
   digitalWrite(rightMotorPin1, LOW);
   digitalWrite(rightMotorPin2, HIGH);
-  analogWrite(enableRightMotor, motorSpeed);
-
-  digitalWrite(leftMotorPin1, LOW);
-  digitalWrite(leftMotorPin2, HIGH);
+  
   analogWrite(enableLeftMotor, motorSpeed);
+  digitalWrite(leftMotorPin1, HIGH);
+  digitalWrite(leftMotorPin2, LOW);
+  
 }
 
 //turns right 127 sehr schwach drehend -127 sehr stark drehend wenn unter 0 ein Motor dreht sich in falsche richtung
