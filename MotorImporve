@@ -1,0 +1,138 @@
+//for mesurement sensor
+#define echoPin A2  //input
+#define trigPin A3  //output
+//for check for white floor
+#define SensorWhite A5
+#define SensorWhite1 A4
+
+//for movement
+int motorSpeed = 127;
+
+// Rechter Motor
+int enableRightMotor = 3;
+int rightMotorPin1 = 8;
+int rightMotorPin2 = 7;
+
+// Linker Motor
+int enableLeftMotor = 6;
+int leftMotorPin1 = 4;
+int leftMotorPin2 = 5;
+
+
+
+
+void setup() {
+  Serial.begin(9600);
+  // rechter Motor
+  pinMode(enableRightMotor, OUTPUT);
+  pinMode(rightMotorPin1, OUTPUT);
+  pinMode(rightMotorPin2, OUTPUT);
+
+  // Linker Motor
+  pinMode(enableLeftMotor, OUTPUT);
+  pinMode(leftMotorPin1, OUTPUT);
+  pinMode(leftMotorPin2, OUTPUT);
+
+  //Speed
+  analogWrite(enableRightMotor, motorSpeed);
+  analogWrite(enableLeftMotor, motorSpeed);
+
+  //distance sensor
+  pinMode(echoPin, INPUT);
+  pinMode(trigPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  if(BWsensor() == false){
+    forward();
+  }
+}
+
+//waiting for enemy
+void wait() {
+  right(-127);
+}
+
+//goes forward
+void forward() {
+  analogWrite(enableRightMotor, motorSpeed);
+  digitalWrite(rightMotorPin1, HIGH);
+  digitalWrite(rightMotorPin2, LOW);
+
+  analogWrite(enableLeftMotor, motorSpeed);
+  digitalWrite(leftMotorPin1, HIGH);
+  digitalWrite(leftMotorPin2, LOW);
+}
+
+//goes backwards
+void backwards() {
+  digitalWrite(rightMotorPin1, LOW);
+  digitalWrite(rightMotorPin2, HIGH);
+  analogWrite(enableRightMotor, motorSpeed);
+
+  digitalWrite(leftMotorPin1, LOW);
+  digitalWrite(leftMotorPin2, HIGH);
+  analogWrite(enableLeftMotor, motorSpeed);
+}
+
+//turns right 127 sehr schwach drehend -127 sehr stark drehend wenn unter 0 ein Motor dreht sich in falsche richtung
+void right(int intensity) {
+  if (intensity >= 0) {
+    analogWrite(enableRightMotor, motorSpeed);
+    digitalWrite(rightMotorPin1, HIGH);
+    digitalWrite(rightMotorPin2, LOW);
+
+    analogWrite(enableLeftMotor, intensity);
+    digitalWrite(leftMotorPin1, HIGH);
+    digitalWrite(leftMotorPin2, LOW);
+  }else if(intensity<0){
+    analogWrite(enableRightMotor, motorSpeed);
+    digitalWrite(rightMotorPin1, HIGH);
+    digitalWrite(rightMotorPin2, LOW);
+
+    analogWrite(enableLeftMotor, abs(intensity));
+    digitalWrite(leftMotorPin1, LOW);
+    digitalWrite(leftMotorPin2, HIGH );
+  }
+}
+
+//guess what, it turns left intensity je höher je schwächer dreht er bis 127 und -127 wenn Wert unter 0 dreht ein Motor in falsche Richtung
+void left(int intensity) {
+  if (intensity >= 0) {
+    analogWrite(enableRightMotor, intensity);
+    digitalWrite(rightMotorPin1, HIGH);
+    digitalWrite(rightMotorPin2, LOW);
+
+    analogWrite(enableLeftMotor, motorSpeed);
+    digitalWrite(leftMotorPin1, HIGH);
+    digitalWrite(leftMotorPin2, LOW);
+  }else if(intensity<0){
+    analogWrite(enableRightMotor, abs(intensity));
+    digitalWrite(rightMotorPin1, LOW);
+    digitalWrite(rightMotorPin2, HIGH);
+
+    analogWrite(enableLeftMotor, motorSpeed);
+    digitalWrite(leftMotorPin1, HIGH);
+    digitalWrite(leftMotorPin2, LOW);
+  }
+}
+
+//distance mesurement
+long dmesurement() {
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(1000);
+  digitalWrite(trigPin, LOW);
+  long distance = pulseIn(echoPin, HIGH) * 0.017;
+  //Serial.print(distance);
+  //Serial.println(" cm");
+  return distance;
+}
+
+bool BWsensor() {
+  if (analogRead(SensorWhite) < 500 || analogRead(SensorWhite1) < 500) {
+    return (true);
+  } else {
+    return (false);
+  }
+}
