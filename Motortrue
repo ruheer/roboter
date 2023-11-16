@@ -6,7 +6,8 @@
 #define SensorWhite1 A4
 
 //for movement
-int motorSpeed = 127;
+int motorSpeedright = 130;
+int motorSpeedleft = 135;
 
 // Rechter Motor
 int enableRightMotor = 3;
@@ -34,8 +35,8 @@ void setup() {
   pinMode(leftMotorPin2, OUTPUT);
 
   //Speed
-  analogWrite(enableRightMotor, motorSpeed);
-  analogWrite(enableLeftMotor, motorSpeed);
+  analogWrite(enableRightMotor, motorSpeedright);
+  analogWrite(enableLeftMotor, motorSpeedleft);
 
   //distance sensor
   pinMode(echoPin, INPUT);
@@ -59,11 +60,11 @@ void wait() {
 
 //goes forward
 void backwards() {
-  analogWrite(enableRightMotor, motorSpeed);
+  analogWrite(enableRightMotor, motorSpeedright);
   digitalWrite(rightMotorPin1, HIGH);
   digitalWrite(rightMotorPin2, LOW);
 
-  analogWrite(enableLeftMotor, motorSpeed);
+  analogWrite(enableLeftMotor, motorSpeedleft);
   digitalWrite(leftMotorPin1, LOW);
   digitalWrite(leftMotorPin2, HIGH);
   Serial.println("hello world");
@@ -71,11 +72,11 @@ void backwards() {
 
 //goes backwards
 void forward() {
-  analogWrite(enableRightMotor, motorSpeed);
+  analogWrite(enableRightMotor, motorSpeedright);
   digitalWrite(rightMotorPin1, LOW);
   digitalWrite(rightMotorPin2, HIGH);
   
-  analogWrite(enableLeftMotor, motorSpeed);
+  analogWrite(enableLeftMotor, motorSpeedleft);
   digitalWrite(leftMotorPin1, HIGH);
   digitalWrite(leftMotorPin2, LOW);
   
@@ -84,7 +85,7 @@ void forward() {
 //turns right 127 sehr schwach drehend -127 sehr stark drehend wenn unter 0 ein Motor dreht sich in falsche richtung
 void right(int intensity) {
   if (intensity >= 0) {
-    analogWrite(enableRightMotor, motorSpeed);
+    analogWrite(enableRightMotor, motorSpeedright);
     digitalWrite(rightMotorPin1, HIGH);
     digitalWrite(rightMotorPin2, LOW);
 
@@ -92,7 +93,7 @@ void right(int intensity) {
     digitalWrite(leftMotorPin1, HIGH);
     digitalWrite(leftMotorPin2, LOW);
   }else if(intensity<0){
-    analogWrite(enableRightMotor, motorSpeed);
+    analogWrite(enableRightMotor, motorSpeedright);
     digitalWrite(rightMotorPin1, HIGH);
     digitalWrite(rightMotorPin2, LOW);
 
@@ -109,7 +110,7 @@ void left(int intensity) {
     digitalWrite(rightMotorPin1, HIGH);
     digitalWrite(rightMotorPin2, LOW);
 
-    analogWrite(enableLeftMotor, motorSpeed);
+    analogWrite(enableLeftMotor, motorSpeedleft);
     digitalWrite(leftMotorPin1, HIGH);
     digitalWrite(leftMotorPin2, LOW);
   }else if(intensity<0){
@@ -117,7 +118,7 @@ void left(int intensity) {
     digitalWrite(rightMotorPin1, LOW);
     digitalWrite(rightMotorPin2, HIGH);
 
-    analogWrite(enableLeftMotor, motorSpeed);
+    analogWrite(enableLeftMotor, motorSpeedleft);
     digitalWrite(leftMotorPin1, HIGH);
     digitalWrite(leftMotorPin2, LOW);
   }
